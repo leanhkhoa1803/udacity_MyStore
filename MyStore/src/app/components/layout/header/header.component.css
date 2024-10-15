@@ -1,0 +1,31 @@
+.header {
+  background: #29aad8;
+  max-width: 100%;
+  text-align: center;
+  color: #fff;
+}
+
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-item {
+  cursor: pointer;
+  padding: 10px 10px;
+}
+.menu-item-cart {
+  cursor: pointer;
+  padding: 10px 0px;
+}
+.separate {
+  width: 1px;
+  height: 20px;
+  background-color: #fff;
+  margin: 10px 0;
+}
+
+.counter {
+  display: flex;
+}
