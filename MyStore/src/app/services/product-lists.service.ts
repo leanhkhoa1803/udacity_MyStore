@@ -50,4 +50,21 @@ export class ProductListsService {
       this.cartStore.next(updatedCartStore);
     }
   }
+
+  removeProductFromCart(product: Product) {
+    let currentCart = this.cartStore.getValue();
+    const productExists = currentCart.some(
+      (item: CartStore) => item.product.id === product.id
+    );
+
+    if (!productExists) {
+      return;
+    }
+
+    const updatedCartStore = currentCart.filter(
+      (item: CartStore) => item.product.id !== product.id
+    );
+
+    this.cartStore.next(updatedCartStore);
+  }
 }

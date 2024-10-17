@@ -1,0 +1,22 @@
+.product-detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+.product-detail-image {
+  border-radius: 10px;
+  width: 320px;
+}
+.detail-item {
+  margin: 10px;
+}
+
+.select-input {
+  width: 100px;
+}
+.back-link {
+  margin-top: 20px;
+  color: blue;
+  cursor: pointer;
+}

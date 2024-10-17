@@ -5,7 +5,13 @@
       <h3>{{ product.name }}</h3>
       <p>$ {{ product.price }}</p>
       <p>{{ product.description }}</p>
-      <input type="number" min="0" required [(ngModel)]="amount" />
+      <input
+        type="number"
+        min="0"
+        required
+        [(ngModel)]="amount"
+        (ngModelChange)="onAmountChange()"
+      />
     </div>
   </div>
 </div>

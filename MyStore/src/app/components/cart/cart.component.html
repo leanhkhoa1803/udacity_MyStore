@@ -1,53 +1,83 @@
 <div class="cart-container">
   <div class="cart-panel">
     <div class="cart-item" *ngFor="let data of itemsInCart">
-      <app-cart-item [productData]="data"></app-cart-item>
+      <app-cart-item
+        [productData]="data"
+        (amountChange)="onHandleAmountChange($event)"
+      ></app-cart-item>
     </div>
     <h2>Total: ${{ totalPrice }}</h2>
   </div>
   <div class="form-container">
-    <form #userForm="ngForm">
+    <form #formInput="ngForm" (ngSubmit)="handleSubmit()">
       <!-- Full Name Field -->
       <div class="form-group">
         <label for="fullName">Full Name:</label>
         <input
+          placeholder="Minimun is 3 characters"
           type="text"
           id="fullName"
           name="fullName"
           class="form-control"
           required
+          minlength="6"
+          [(ngModel)]="fullName"
+          #fullname="ngModel"
         />
+        <div *ngIf="fullname.invalid && fullname.touched" class="input-error">
+          Fullname must 6 digits.
+        </div>
       </div>
 
       <!-- Address Field -->
       <div class="form-group">
         <label for="address">Address:</label>
         <input
+          placeholder="Minimun is 6 characters"
           type="text"
           id="address"
           name="address"
           class="form-control"
           required
+          minlength="6"
+          [(ngModel)]="address"
+          #addressM="ngModel"
         />
+        <div *ngIf="addressM.invalid && addressM.touched" class="input-error">
+          Address must 6 digits.
+        </div>
       </div>
 
       <!-- Credit Card Field -->
       <div class="form-group">
         <label for="creditCard">Credit Card:</label>
         <input
-          type="text"
+          placeholder="(16 digit number)"
+          type="number"
           id="creditCard"
           name="creditCard"
           class="form-control"
           required
+          [(ngModel)]="creditCard"
+          pattern="[0-9]{16}"
+          minlength="16"
+          maxlength="16"
+          #creditCard="ngModel"
         />
+        <div
+          *ngIf="creditCard.invalid && creditCard.touched"
+          class="input-error"
+        >
+          Credit card must be 16 digits.
+        </div>
       </div>
 
       <!-- Submit Button -->
       <button
         type="submit"
+        [ngClass]="formInput.invalid ? '' : 'button-add-cart'"
         class="btn btn-primary"
-        [disabled]="!userForm.valid"
+        [disabled]="!formInput.valid"
       >
         Submit
       </button>
