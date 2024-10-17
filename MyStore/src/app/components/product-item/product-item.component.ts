@@ -1,17 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import Product from '../../models/product';
 import { CommonModule } from '@angular/common';
+import { ProductListsService } from '../../services/product-lists.service';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './product-item.component.html',
   styleUrl: './product-item.component.css',
 })
 export class ProductItemComponent implements OnInit {
   @Input() product: Product = new Product();
-  selectOptions = [
+  @Output() addedToCart = new EventEmitter();
+
+  constructor(
+    private _productListService: ProductListsService,
+    private _router: Router
+  ) {}
+  amount: number = 1;
+
+  options = [
     {
       option: 'Option 1',
       value: 1,
@@ -54,4 +65,13 @@ export class ProductItemComponent implements OnInit {
     },
   ];
   ngOnInit(): void {}
+
+  addToCart(product: Product, amount: number) {
+    this._productListService.addProduct(product, amount);
+    alert('Add Product to Cart , Please clicking to cart to review');
+  }
+
+  navigateToProductDetail(id: number): void {
+    this._router.navigateByUrl(`/product/${id}`);
+  }
 }
